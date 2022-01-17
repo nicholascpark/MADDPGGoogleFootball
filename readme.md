@@ -1,4 +1,4 @@
-Project 3 readme
+< To view and reproduce results shown in maddpg_analysis.pdf >
 
 To view the checkpoints/hyperparameters - go to this directory:
 
