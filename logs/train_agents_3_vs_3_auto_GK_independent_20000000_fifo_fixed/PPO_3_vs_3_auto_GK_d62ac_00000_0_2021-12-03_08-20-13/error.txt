@@ -1,0 +1,70 @@
+Failure # 1 (occurred at 2021-12-03_08-25-04)
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.7/site-packages/ray/tune/trial_runner.py", line 739, in _process_trial
+    results = self.trial_executor.fetch_result(trial)
+  File "/opt/conda/lib/python3.7/site-packages/ray/tune/ray_trial_executor.py", line 746, in fetch_result
+    result = ray.get(trial_future[0], timeout=DEFAULT_GET_TIMEOUT)
+  File "/opt/conda/lib/python3.7/site-packages/ray/_private/client_mode_hook.py", line 82, in wrapper
+    return func(*args, **kwargs)
+  File "/opt/conda/lib/python3.7/site-packages/ray/worker.py", line 1621, in get
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(TypeError): [36mray::PPO.train()[39m (pid=15099, ip=172.17.0.2, repr=PPO)
+  File "/opt/conda/lib/python3.7/site-packages/ray/rllib/agents/trainer.py", line 648, in train
+    raise e
+  File "/opt/conda/lib/python3.7/site-packages/ray/rllib/agents/trainer.py", line 637, in train
+    result = Trainable.train(self)
+  File "/opt/conda/lib/python3.7/site-packages/ray/tune/trainable.py", line 237, in train
+    result = self.step()
+  File "/opt/conda/lib/python3.7/site-packages/ray/rllib/agents/trainer_template.py", line 193, in step
+    res = next(self.train_exec_impl)
+  File "/opt/conda/lib/python3.7/site-packages/ray/util/iter.py", line 756, in __next__
+    return next(self.built_iterator)
+  File "/opt/conda/lib/python3.7/site-packages/ray/util/iter.py", line 783, in apply_foreach
+    for item in it:
+  File "/opt/conda/lib/python3.7/site-packages/ray/util/iter.py", line 783, in apply_foreach
+    for item in it:
+  File "/opt/conda/lib/python3.7/site-packages/ray/util/iter.py", line 843, in apply_filter
+    for item in it:
+  File "/opt/conda/lib/python3.7/site-packages/ray/util/iter.py", line 843, in apply_filter
+    for item in it:
+  File "/opt/conda/lib/python3.7/site-packages/ray/util/iter.py", line 783, in apply_foreach
+    for item in it:
+  File "/opt/conda/lib/python3.7/site-packages/ray/util/iter.py", line 783, in apply_foreach
+    for item in it:
+  File "/opt/conda/lib/python3.7/site-packages/ray/util/iter.py", line 783, in apply_foreach
+    for item in it:
+  [Previous line repeated 1 more time]
+  File "/opt/conda/lib/python3.7/site-packages/ray/util/iter.py", line 876, in apply_flatten
+    for item in it:
+  File "/opt/conda/lib/python3.7/site-packages/ray/util/iter.py", line 828, in add_wait_hooks
+    item = next(it)
+  File "/opt/conda/lib/python3.7/site-packages/ray/util/iter.py", line 783, in apply_foreach
+    for item in it:
+  File "/opt/conda/lib/python3.7/site-packages/ray/util/iter.py", line 783, in apply_foreach
+    for item in it:
+  File "/opt/conda/lib/python3.7/site-packages/ray/util/iter.py", line 783, in apply_foreach
+    for item in it:
+  [Previous line repeated 1 more time]
+  File "/opt/conda/lib/python3.7/site-packages/ray/util/iter.py", line 471, in base_iterator
+    yield ray.get(futures, timeout=timeout)
+ray.exceptions.RayTaskError(TypeError): [36mray::RolloutWorker.par_iter_next()[39m (pid=15094, ip=172.17.0.2, repr=<ray.rllib.evaluation.rollout_worker.RolloutWorker object at 0x7f846cd11d10>)
+  File "/opt/conda/lib/python3.7/site-packages/ray/util/iter.py", line 1151, in par_iter_next
+    return next(self.local_it)
+  File "/opt/conda/lib/python3.7/site-packages/ray/rllib/evaluation/rollout_worker.py", line 346, in gen_rollouts
+    yield self.sample()
+  File "/opt/conda/lib/python3.7/site-packages/ray/rllib/evaluation/rollout_worker.py", line 744, in sample
+    batches = [self.input_reader.next()]
+  File "/opt/conda/lib/python3.7/site-packages/ray/rllib/evaluation/sampler.py", line 101, in next
+    batches = [self.get_data()]
+  File "/opt/conda/lib/python3.7/site-packages/ray/rllib/evaluation/sampler.py", line 231, in get_data
+    item = next(self.rollout_provider)
+  File "/opt/conda/lib/python3.7/site-packages/ray/rllib/evaluation/sampler.py", line 651, in _env_runner
+    base_env.send_actions(actions_to_send)
+  File "/opt/conda/lib/python3.7/site-packages/ray/rllib/env/base_env.py", line 423, in send_actions
+    obs, rewards, dones, infos = env.step(agent_dict)
+  File "/mnt/rldm/utils/football_tools.py", line 135, in step
+    actions = [np.random.choice(len(i), p = i) for i in actions]
+  File "/mnt/rldm/utils/football_tools.py", line 135, in <listcomp>
+    actions = [np.random.choice(len(i), p = i) for i in actions]
+TypeError: object of type 'numpy.int64' has no len()
+
